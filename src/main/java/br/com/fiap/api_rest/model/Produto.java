@@ -9,7 +9,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "TB_PRODUTOS")
 public class Produto {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
