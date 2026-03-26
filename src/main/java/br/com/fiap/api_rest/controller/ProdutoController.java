@@ -1,5 +1,6 @@
 package br.com.fiap.api_rest.controller;
 
+import br.com.fiap.api_rest.dto.ProdutoLista;
 import br.com.fiap.api_rest.dto.ProdutoRequest;
 import br.com.fiap.api_rest.dto.ProdutoResponse;
 import br.com.fiap.api_rest.model.Produto;
@@ -12,8 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -41,9 +40,9 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProdutoResponse>> readProduto(@RequestParam(defaultValue = "0") Integer pageNumber) {
+    public ResponseEntity<Page<ProdutoLista>> readProduto(@RequestParam(defaultValue = "0") Integer pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber, 2, Sort.by("nome").ascending());
-        Page<ProdutoResponse> produtos = produtoService.read(pageable);
+        Page<ProdutoLista> produtos = produtoService.read(pageable);
         if (produtos.isEmpty()) {
             return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
